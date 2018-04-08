@@ -1,0 +1,14 @@
+<h1>Nutzer:</h1>
+<ul *ngFor="let name of usernames|async">
+  <li> {{name}}</li>
+</ul>
+
+<h2> Neuer Nutzer: </h2>
+<label for="name" class="sr-only">Name des neuen Nutzers</label>
+<input #inputName type="text" id="name" />
+<input type="button" name="addUser" value="Hinzufügen" (click)="addUser(inputName.value)">
+
+<div>
+  <h2>Zuletzt hinzugefügter Nutzer: </h2>
+  {{lastUser|async}}
+</div>
