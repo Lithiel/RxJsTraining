@@ -1,12 +1,15 @@
 <h1>Nutzer:</h1>
-<ul *ngFor="let name of usernames|async">
-  <li> {{name}}</li>
+<ul *ngFor="let user of users|async">
+  <li> {{user | fullName:shortening | uppercase}}</li>
 </ul>
+<button name="toggleShortening" (click)="toggleShortening()">Toggle</button>
 
 <h2> Neuer Nutzer: </h2>
-<label for="name" class="sr-only">Name des neuen Nutzers</label>
-<input #inputName type="text" id="name" />
-<input type="button" name="addUser" value="Hinzufügen" (click)="addUser(inputName.value)">
+<label for="forename" class="sr-only">Name des neuen Nutzers</label>
+<input #inputForename type="text" id="forename" />
+<label for="surname" class="sr-only">Name des neuen Nutzers</label>
+<input #inputSurname type="text" id="surname" />
+<input type="button" name="addUser" value="Hinzufügen" (click)="addUser(inputForename.value, inputSurname.value)">
 
 <div>
   <h2>Zuletzt hinzugefügter Nutzer: </h2>

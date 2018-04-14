@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {Observable} from "rxjs/Observable";
-import {User} from "./userlist/user";
+import {sortByUsername, User} from "./userlist/user";
 import {of as observableOf} from "rxjs/observable/of";
 import {BehaviorSubject} from "rxjs/BehaviorSubject";
 import {map} from "rxjs/operators";
@@ -29,31 +29,24 @@ export class UserService {
     return this._users.pipe(
       map(users => {
         let sortUsers = [...users];
-        return sortUsers.sort(this.sortByUsername);
+        return sortUsers.sort(sortByUsername);
       })
     )
   }
 
   public getUser(id: number): Observable<Array<User>> {
     return this._users.pipe(
-      map(users=> users.filter(user => user.id === id))
+      map(users => users.filter(user => user.id === id))
     )
   }
 
-  public addUser(name: string): Observable<User> {
-    const user: User = {id: this.nextId, name: name};
+  public addUser(forename: string, surname: string): Observable<User> {
+    const user: User = {id: this.nextId, forename: forename, surname: surname};
     const usersWithAddedUser = this._users.getValue();
     usersWithAddedUser.push(user);
 
     this._users.next(usersWithAddedUser);
     return observableOf(user);
-  }
-
-  private sortByUsername(lhs: User, rhs: User){
-    if (lhs.name > rhs.name) {
-      return 1;
-    }
-    return -1;
   }
 
 }
