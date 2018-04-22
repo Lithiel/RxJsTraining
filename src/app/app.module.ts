@@ -7,6 +7,7 @@ import {UserlistComponent} from './userlist/userlist.component';
 import {UserService} from "./user.service";
 import { FullNamePipe } from './userlist/full-name.pipe';
 import { UppercasePipe } from './userlist/uppercase.pipe';
+import { SearchHighlightDirective } from './userlist/search-highlight.directive';
 
 
 @NgModule({
@@ -14,7 +15,8 @@ import { UppercasePipe } from './userlist/uppercase.pipe';
     AppComponent,
     UserlistComponent,
     FullNamePipe,
-    UppercasePipe
+    UppercasePipe,
+    SearchHighlightDirective
   ],
   imports: [
     BrowserModule

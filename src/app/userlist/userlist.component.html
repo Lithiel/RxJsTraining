@@ -1,14 +1,17 @@
 <h1>Nutzer:</h1>
 <ul *ngFor="let user of users|async">
-  <li> {{user | fullName:shortening | uppercase}}</li>
+  <li appSearchHighlight [text]="searchText | async">{{user | fullName:shortening}}</li>
 </ul>
-<button name="toggleShortening" (click)="toggleShortening()">Toggle</button>
+<button name="toggleShortening" (click)="toggleShortening()">{{toggleText}}</button>
+<label for="forename" class="sr-only">Nutzersuche</label>
+<input type="text" id="search" placeholder="Suche" (keyup)="search($event)">
+{{searchFragment}}
 
 <h2> Neuer Nutzer: </h2>
 <label for="forename" class="sr-only">Name des neuen Nutzers</label>
-<input #inputForename type="text" id="forename" />
+<input #inputForename type="text" id="forename" placeholder="Vorname"/>
 <label for="surname" class="sr-only">Name des neuen Nutzers</label>
-<input #inputSurname type="text" id="surname" />
+<input #inputSurname type="text" id="surname" placeholder="Nachname" />
 <input type="button" name="addUser" value="Hinzufügen" (click)="addUser(inputForename.value, inputSurname.value)">
 
 <div>
